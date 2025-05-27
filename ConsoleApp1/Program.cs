@@ -95,122 +95,154 @@ namespace ConsoleApp1
             Console.WriteLine("\nSeçiminiz: " + (selectedIndex == 0 ? "cats" : "dogs"));
             if (selectedIndex == 0)
             {
-                Console.Clear();
-                Console.WriteLine(@"           
+                int selected = 0;
+                ConsoleKey keyCats;
+
+                do
+                {
+                    Console.Clear();
+                    Console.WriteLine(@"           
                         _       
                ___ __ _| |_ ___ 
               / __/ _` | __/ __|
              | (_| (_| | |_\__ \
               \___\__,_|\__|___/");
-                for (int i = 0; i < cats.Length; i++)
-                {
-                    Console.WriteLine($"\t------------------Cat {i + 1}-------------------");
-                    Console.WriteLine($"\tName: {cats[i].nickName}");
-                    Console.WriteLine($"\tAge: {cats[i].age}");
-                    Console.WriteLine($"\tGender: {cats[i].gender}");
-                    Console.WriteLine($"\tEnergy: {cats[i].energy}");
-                    Console.WriteLine($"\tPrice: {cats[i].price}");
-                    Console.WriteLine($"\tMeal Quantity: {cats[i].mealQuantity}");
-                }
-                Console.Write("\n\tEnter Choice: ");
-                int choiceCat = int.Parse(Console.ReadLine());
-                Console.Clear();
-                if(choiceCat <= cats.Length)
-                {
-                    while (true)
+                    for (int i = 0; i < cats.Length; i++)
                     {
-                    Console.WriteLine($"{cats[choiceCat-1].nickName}'s Energy is:{cats[choiceCat-1].energy} and Age: {cats[choiceCat- 1].age}");
-                        Console.WriteLine("1. Eat\n2. Sleep\n3. Play\nChoice: ");
-                        int choice = int.Parse(Console.ReadLine());
-                        if (choice == 1)
+                        if (i == selected)
                         {
-                            if (cats[choiceCat-1].energy == 0)
-                            {
-                                Console.WriteLine("You have to sleap!!!!");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Eating...");
-                                Console.WriteLine("How mani meal do you want?: ");
-                                int meal = int.Parse(Console.ReadLine());
-                                cats[choiceCat-1].Eat(meal);
-                            }
-                            
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"\t>> ------------------Cat {i + 1}-------------------");
                         }
-                        else if (choice == 2)
+                        else
                         {
-                            Console.WriteLine("Sleaping...");
-                           cats[choiceCat - 1].Sleep();
+                            Console.WriteLine($"\t   ------------------Cat {i + 1}-------------------");
+                        }
 
-                        }
-                        else if (choice == 3)
-                        {
-                            cats[choiceCat - 1].Play();
-                        }
+                        Console.WriteLine($"\t\tName: {cats[i].nickName}");
+                        Console.WriteLine($"\t\tAge: {cats[i].age}");
+                        Console.WriteLine($"\t\tGender: {cats[i].gender}");
+                        Console.WriteLine($"\t\tEnergy: {cats[i].energy}");
+                        Console.WriteLine($"\t\tPrice: {cats[i].price}");
+                        Console.WriteLine($"\t\tMeal Quantity: {cats[i].mealQuantity}");
+                        Console.WriteLine();
+                        Console.ResetColor();
+                    }
+
+                    keyCats = Console.ReadKey(true).Key;
+
+                    if (keyCats == ConsoleKey.UpArrow)
+                    {
+                        selected = (selected == 0) ? cats.Length - 1 : selected - 1;
+                    }
+                    else if (keyCats == ConsoleKey.DownArrow)
+                    {
+                        selected = (selected == cats.Length - 1) ? 0 : selected + 1;
+                    }
+
+                } while (keyCats != ConsoleKey.Enter);
+                Console.Clear();
+                Console.WriteLine("Your new cat:\n");
+                while (true)
+                {
+                    Console.WriteLine($"{cats[selected].nickName}'s Energy is:{cats[selected].energy} and Age: {cats[selected].age}");
+                    Console.WriteLine("1. Eat\n2. Sleep\n3. Play\nChoice: ");
+                    int choice = int.Parse(Console.ReadLine());
+                    if (choice == 1)
+                    {
+                        Console.WriteLine("Eating...");
+                        Console.WriteLine("How mani meal do you want?: ");
+                        int meal = int.Parse(Console.ReadLine());
+                        cats[selected].Eat(meal);
+
+                    }
+                    else if (choice == 2)
+                    {
+                        Console.WriteLine("Sleaping...");
+                        cats[selected].Sleep();
+
+                    }
+                    else if (choice == 3)
+                    {
+                        cats[selected].Play();
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Error!!!");
-                }
-                    
             }
             if (selectedIndex == 1)
             {
-                Console.Clear();
-                Console.WriteLine("      _                 \r\n   __| | ___   __ _ ___ \r\n  / _` |/ _ \\ / _` / __|\r\n | (_| | (_) | (_| \\__ \\\r\n  \\__,_|\\___/ \\__, |___/\r\n              |___/     ");
-                for (int i = 0; i < dogs.Length; i++)
-                {
-                    Console.WriteLine($"------------------Dog {i + 1}-------------------");
-                    Console.WriteLine($"Name: {dogs[i].nickName}");
-                    Console.WriteLine($"Age: {dogs[i].age}");
-                    Console.WriteLine($"Gender: {dogs[i].gender}");
-                    Console.WriteLine($"Energy: {dogs[i].energy}");
-                    Console.WriteLine($"Price: {dogs[i].price}");
-                    Console.WriteLine($"Meal Quantity: {dogs[i].mealQuantity}");
-                }
-                Console.Write("Enter Choice: ");
-                int choiceDog = int.Parse(Console.ReadLine());
-                Console.Clear();
-                if(choiceDog < dogs.Length)
-                {
+                int selected = 0;
+                ConsoleKey keyDogs;
 
-                    while (true)
+                do
+                {
+                    Console.Clear();
+                    Console.WriteLine("\t\t      _                 \r\n\t\t   __| | ___   __ _ ___ \r\n\t\t  / _` |/ _ \\ / _` / __|\r\n\t\t | (_| | (_) | (_| \\__ \\\r\n\t\t  \\__,_|\\___/ \\__, |___/\r\n\t\t              |___/");
+                    for (int i = 0; i < dogs.Length; i++)
                     {
-                    Console.WriteLine($"{dogs[choiceDog - 1].nickName}'s Energy is:{dogs[choiceDog - 1].energy} and Age: {dogs[choiceDog - 1].age}");
-                        Console.WriteLine("1. Eat\n2. Sleep\n3. Play\nChoice: ");
-                        int choice = int.Parse(Console.ReadLine());
-                        if (choice == 1)
+                        if (i == selected)
                         {
-                            Console.WriteLine("Eating...");
-                            Console.WriteLine("How mani meal do you want?: ");
-                            int meal = int.Parse(Console.ReadLine());
-                            dogs[choiceDog - 1].Eat(meal);
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            Console.WriteLine($"\t>> ------------------Dog {i + 1}-------------------");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"\t   ------------------Dog {i + 1}-------------------");
+                        }
 
-                        }
-                        else if (choice == 2)
-                        {
-                            Console.WriteLine("Sleaping...");
-                            dogs[choiceDog - 1].Sleep();
+                        Console.WriteLine($"\t\tName: {dogs[i].nickName}");
+                        Console.WriteLine($"\t\tAge: {dogs[i].age}");
+                        Console.WriteLine($"\t\tGender: {dogs[i].gender}");
+                        Console.WriteLine($"\t\tEnergy: {dogs[i].energy}");
+                        Console.WriteLine($"\t\tPrice: {dogs[i].price}");
+                        Console.WriteLine($"\t\tMeal Quantity: {dogs[i].mealQuantity}");
+                        Console.WriteLine();
+                        Console.ResetColor();
+                    }
 
-                        }
-                        else if (choice == 3)
-                        {
-                            dogs[choiceDog - 1].Play();
-                        }
-                    }   
+                    keyDogs = Console.ReadKey(true).Key;
+
+                    if (keyDogs == ConsoleKey.UpArrow)
+                    {
+                        selected = (selected == 0) ? dogs.Length - 1 : selected - 1;
+                    }
+                    else if (keyDogs == ConsoleKey.DownArrow)
+                    {
+                        selected = (selected == dogs.Length - 1) ? 0 : selected + 1;
+                    }
+
+                } while (keyDogs != ConsoleKey.Enter);
+                Console.Clear();
+                Console.WriteLine("Your new cat:\n");
+                while (true)
+                {
+                    Console.WriteLine($"{dogs[selected].nickName}'s Energy is:{dogs[selected].energy} and Age: {dogs[selected].age}");
+                    Console.WriteLine("1. Eat\n2. Sleep\n3. Play\nChoice: ");
+                    int choice = int.Parse(Console.ReadLine());
+                    if (choice == 1)
+                    {
+                        Console.WriteLine("Eating...");
+                        Console.WriteLine("How mani meal do you want?: ");
+                        int meal = int.Parse(Console.ReadLine());
+                        dogs[selected].Eat(meal);
+
+                    }
+                    else if (choice == 2)
+                    {
+                        Console.WriteLine("Sleaping...");
+                        dogs[selected].Sleep();
+
+                    }
+                    else if (choice == 3)
+                    {
+                        dogs[selected].Play();
+                    }
                 }
+            }
                 else
                 {
                     Console.WriteLine("Error!!!");
                 }
             }
 
-
-
-
-
-
-        }
     }
 }
