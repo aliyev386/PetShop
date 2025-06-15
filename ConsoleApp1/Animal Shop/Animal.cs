@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Animal_Shop
 {
-    class Animal
+    abstract class Animal
     {
         public virtual string nickName { get; set; }
         public virtual double age { get; set; }

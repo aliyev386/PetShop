@@ -101,9 +101,46 @@ namespace ConsoleApp1.Animal_Shop
                         Console.WriteLine("You have to sleap !!!");
                         break;
                     }
-                    Console.WriteLine($"Your energy {energy} %\nDo you want to continue?\n1. Yes 2. No\nChoice: ");
-                    int choice = int.Parse(Console.ReadLine());
-                    if (choice == 2)
+                    
+                    string[] options2 = {
+            "1) Yes",
+            "2) No",
+        };
+
+                    int selectedIndex2 = 0;
+                    ConsoleKey key2;
+                    do
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"Your energy {energy} %\nDo you want to continue?\n1. Yes 2. No\nChoice: \n");
+
+                        for (int i = 0; i < options2.Length; i++)
+                        {
+                            if (i == selectedIndex2)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("-> " + options2[i]);
+                                Console.ResetColor();
+                            }
+                            else
+                            {
+                                Console.WriteLine("   " + options2[i]);
+                            }
+                        }
+
+                        key2 = Console.ReadKey(true).Key;
+
+                        if (key2 == ConsoleKey.UpArrow)
+                        {
+                            selectedIndex2 = (selectedIndex2 == 0) ? options2.Length - 1 : selectedIndex2 - 1;
+                        }
+                        else if (key2 == ConsoleKey.DownArrow)
+                        {
+                            selectedIndex2 = (selectedIndex2 + 1) % options2.Length;
+                        }
+
+                    } while (key2 != ConsoleKey.Enter);
+                    if (selectedIndex2 == 1)
                     {
                         break;
                     }
